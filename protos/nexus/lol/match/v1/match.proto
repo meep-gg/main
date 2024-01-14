@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package nexus.lol.match.v1;
+
+option go_package = "meep.gg/protos/nexus/lol/match/v1";
+import "google/protobuf/empty.proto";
+import "scylla/lol/match/v1/match.proto";
+import "scylla/lol/participant/v1/participant.proto";
+import "scylla/lol/participantdetail/v1/participantdetail.proto";
+
+service MatchService {
+  rpc GetMatchParticipants(GetMatchReq) returns (MatchParticipantsRes) {}
+  rpc GetMatchDetails(GetMatchReq) returns (MatchDetailsRes) {}
+  rpc GetMatches(GetMatchesReq) returns (MatchesRes) {}
+  rpc UpdatePlayerMatches(UpdatePlayerMatchesReq) returns (google.protobuf.Empty) {}
+}
+
+message UpdatePlayerMatchesReq {
+  string region = 1;
+  string puuid = 2;
+}
+
+message GetMatchReq {
+  string region = 1;
+  int64 gameId = 2;
+}
+
+message GetMatchesReq {
+  string region = 1;
+  string puuid = 2;
+  int64 gameId = 3;
+}
+
+message MatchParticipantsRes {
+  repeated scylla.lol.participant.v1.ScyllaParticipant participants = 1;
+}
+
+message MatchDetailsRes {
+  repeated scylla.lol.participantdetail.v1.ScyllaParticipantdetail details = 1;
+}
+
+message MatchesRes {
+  repeated scylla.lol.match.v1.ScyllaMatch matches = 1;
+  repeated scylla.lol.participant.v1.ScyllaParticipant participants = 2;
+}

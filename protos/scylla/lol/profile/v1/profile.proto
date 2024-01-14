@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package scylla.lol.profile.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/profile/v1";
+import "google/protobuf/empty.proto";
+
+service ScyllaProfileService {
+  rpc GetProfile(ScyllaProfileReq) returns (ScyllaProfile) {}
+  rpc UpsertProfile(ScyllaUpsertProfileReq) returns (ScyllaProfile) {}
+  rpc DeleteProfile(ScyllaProfileReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaProfileReq {
+  string region = 1;
+  string gameName = 2;
+  string tagLine = 3;
+}
+
+message ScyllaUpsertProfileReq {
+  string region = 1;
+  ScyllaProfile profile = 2;
+}
+message ScyllaProfile {
+  string region = 1;
+  string gameName = 2;
+  string tagLine = 3;
+  string puuid = 4;
+  string summonerId = 5;
+  int32 profileIconId = 6;
+  int32 summonerLevel = 7;
+}

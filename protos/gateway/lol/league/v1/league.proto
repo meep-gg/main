@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package gateway.lol.league.v1;
+
+option go_package = "meep.gg/protos/gateway/lol/league/v1";
+import "scylla/lol/league/v1/league.proto";
+import "google/protobuf/empty.proto";
+
+service GatewayLeagueService {
+  rpc GetLeagues(GatewayLeagueReq) returns (scylla.lol.league.v1.ScyllaLeagueEntries) {}
+  rpc UpdateLeagues(GatewayLeagueReq) returns (scylla.lol.league.v1.ScyllaLeagueEntries) {}
+
+  rpc UpdateChallenger(GatewayApexUpdateReq) returns (google.protobuf.Empty) {}
+  rpc UpdateGrandmaster(GatewayApexUpdateReq) returns (google.protobuf.Empty) {}
+  rpc UpdateMaster(GatewayApexUpdateReq) returns (google.protobuf.Empty) {}
+
+  rpc UpdateEntry(GatewayUpdateEntryReq) returns (GatewayUpdateEntryRes) {}
+}
+
+message GatewayApexUpdateReq {
+  string region = 1;
+  string queueType = 2;
+}
+
+
+message GatewayLeagueReq {
+  string region = 1;
+  string summonerId = 2;
+}
+
+message GatewayUpdateEntryReq {
+  string region = 1;
+  string queueType = 2;
+  string tier = 3;
+  string division = 4;
+  int32 page = 5;
+}
+
+message GatewayUpdateEntryRes {
+  int32 documents = 1;
+}

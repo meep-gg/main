@@ -1,0 +1,49 @@
+syntax = "proto3";
+package riot.lol.summoner.v1;
+
+option go_package = "meep.gg/protos/riot/lol/summoner/v1";
+
+service RiotSummonerService {
+  rpc Account (RiotSummonerAccountReq) returns (RiotSummoner) {}
+  rpc Name (RiotSummonerNameReq) returns (RiotSummoner) {}
+  rpc Puuid (RiotSummonerPuuidReq) returns (RiotSummoner) {}
+  rpc Id (RiotSummonerIdReq) returns (RiotSummoner) {}
+}
+
+message RiotSummoner {
+  string accountId = 1;
+  string name = 2;
+  string puuid = 3;
+  string id = 4;
+  int32 profileIconId = 5;
+  int64 revisionDate = 6;
+  int32 summonerLevel = 7;
+}
+
+message RiotSummonerReq {
+  string region = 1;
+  string accountId = 2;
+  string name = 3;
+  string puuid = 4;
+  string id = 5;
+}
+
+message RiotSummonerAccountReq {
+  string region = 1;
+  string accountId = 2;
+}
+
+message RiotSummonerNameReq {
+  string region = 1;
+  string name = 2;
+}
+
+message RiotSummonerPuuidReq {
+  string region = 1;
+  string puuid = 2;
+}
+
+message RiotSummonerIdReq {
+  string region = 1;
+  string id = 2;
+}

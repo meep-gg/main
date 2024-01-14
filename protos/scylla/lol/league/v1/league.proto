@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package scylla.lol.league.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/league/v1";
+import "google/protobuf/empty.proto";
+
+service ScyllaLeagueService {
+  rpc GetLeague(ScyllaLeagueReq) returns (ScyllaLeagueEntry) {}
+  rpc GetLeagues(ScyllaLeagueReq) returns (ScyllaLeagueEntries) {}
+  rpc UpsertLeague(ScyllaUpsertLeagueReq) returns (google.protobuf.Empty) {}
+  rpc DeleteLeague(ScyllaLeagueReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaUpsertLeagueReq {
+  string region = 1;
+  string queueType = 2;
+  ScyllaLeagueEntry league = 3;
+}
+
+message ScyllaLeagueReq {
+  string region = 1;
+  string summonerId = 2;
+  string queueType = 3;
+}
+
+message ScyllaLeagueEntry {
+  string summonerId = 1;
+  string queueType = 2;
+  string tier = 3;
+  string rank = 4;
+  int32 leaguePoints = 5;
+  int32 wins = 6;
+  int32 losses = 7;
+  int32 current = 8;
+}
+
+message ScyllaLeagueEntries {
+  repeated ScyllaLeagueEntry entries = 1;
+}

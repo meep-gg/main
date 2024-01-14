@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package gateway.lol.match.v1;
+
+option go_package = "meep.gg/protos/gateway/lol/match/v1";
+import "google/protobuf/empty.proto";
+
+service GatewayMatchService {
+  rpc UpdatePlayerMatches(GatewayMatchPlayerReq) returns (google.protobuf.Empty) {}
+}
+
+message GatewayMatchPlayerReq {
+  string region = 1;
+  string puuid = 2;
+}

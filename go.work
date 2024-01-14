@@ -1,0 +1,26 @@
+go 1.21.5
+
+use (
+  // protos
+  ./protos
+
+  // Common Files
+  ./common/types
+  ./common/log
+  ./common/rates
+  ./common/http
+  ./common/grpc
+  ./common/scylla
+
+  // Tests
+  ./server/test
+  // Riot
+  ./server/riot/api
+  ./server/riot/gateway
+  ./server/riot/scylla
+  // League of legends
+  ./server/lol/api
+  ./server/lol/scylla
+  ./server/lol/gateway
+  ./server/lol/nexus
+)

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package gateway.lol.summoner.v1;
+
+option go_package = "meep.gg/protos/gateway/lol/summoner/v1";
+import "scylla/lol/summoner/v1/summoner.proto";
+
+service GatewaySummonerService {
+  rpc GetSummoner(GatewaySummonerReq) returns (scylla.lol.summoner.v1.ScyllaSummoner) {}
+  rpc UpdateSummoner(GatewaySummonerReq) returns (scylla.lol.summoner.v1.ScyllaSummoner) {}
+}
+
+message GatewaySummonerReq {
+  string region = 1;
+  string summonerId = 2;
+  string puuid = 3;
+}

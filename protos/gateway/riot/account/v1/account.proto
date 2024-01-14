@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package gateway.riot.account.v1;
+
+option go_package = "meep.gg/protos/gateway/riot/account/v1";
+
+import "scylla/riot/account/v1/account.proto";
+
+service GatewayAccountService {
+  rpc GetAccount(GatewayAccountReq) returns (scylla.riot.account.v1.ScyllaAccount) {}
+  rpc UpdateAccount(GatewayAccountReq) returns (scylla.riot.account.v1.ScyllaAccount) {}
+}
+
+message GatewayAccountReq {
+  string region = 1;
+  string puuid = 2;
+  string gameName = 3;
+  string tagLine = 4;
+}

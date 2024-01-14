@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package nexus.lol.profile.v1;
+
+option go_package = "meep.gg/protos/nexus/lol/profile/v1";
+import "scylla/lol/profile/v1/profile.proto";
+import "scylla/lol/league/v1/league.proto";
+
+service ProfileService {
+  rpc GetProfile(ProfileReq) returns (GetProfileRes) {}
+  rpc UpdateProfile(ProfileReq) returns (GetProfileRes) {}
+}
+
+message ProfileReq {
+  string region = 1;
+  string gameName = 2;
+  string tagLine = 3;
+}
+
+message GetProfileRes {
+  scylla.lol.profile.v1.ScyllaProfile profile = 1;
+  scylla.lol.league.v1.ScyllaLeagueEntry rankedSolo = 2;
+  scylla.lol.league.v1.ScyllaLeagueEntry rankedFlex = 3;
+}

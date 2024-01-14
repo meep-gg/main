@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package scylla.lol.participantdetail.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/participantdetail/v1";
+import "google/protobuf/empty.proto";
+
+service ScyllaParticipantdetailService {
+  // Participantdetails
+  rpc GetMatchParticipantsdetail(ScyllaGetParticipantdetailsReq) returns (ScyllaParticipantdetails) {}
+  rpc GetParticipantdetail(ScyllaParticipantdetailReq) returns (ScyllaParticipantdetail) {}
+  rpc UpsertParticipantdetail(ScyllaUpsertParticipantdetailReq) returns (google.protobuf.Empty) {}
+  rpc DeleteParticipantdetail(ScyllaParticipantdetailReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaUpsertParticipantdetailReq {
+  string region = 1;
+  ScyllaParticipantdetail detail = 2;
+}
+
+message ScyllaParticipantdetails {
+  repeated ScyllaParticipantdetail details = 1;
+}
+
+message ScyllaGetParticipantdetailsReq {
+  string region = 1;
+  int64 gameId = 2;
+  int32 count = 3;
+}
+
+message ScyllaParticipantdetailReq {
+  string region = 1;
+  int64 gameId = 2;
+  int32 participantId = 3;
+}
+
+message ScyllaParticipantdetail {
+  int64 gameId = 1;
+  int32 participantId = 2;
+  int32 damageDealtToBuildings = 3;
+  int32 damageDealtToObjectives = 4;
+  int32 damageDealtToTurrets = 5;
+  int32 damageSelfMitigated = 6;
+  int32 magicDamageDealt = 7;
+  int32 magicDamageDealtToChampions = 8;
+  int32 magicDamageTaken = 9;
+  int32 neutralMinionsKilled = 10;
+  ScyllaPerks perks = 11;
+  int32 physicalDamageDealt = 12;
+  int32 physicalDamageDealtToChampions = 13;
+  int32 physicalDamageTaken = 14;
+  int32 spell1Casts = 15;
+  int32 spell2Casts = 16;
+  int32 spell3Casts = 17;
+  int32 spell4Casts = 18;
+  int32 summoner1Casts = 19;
+  int32 summoner2Casts = 20;
+  float damageTakenOnTeamPercentage = 21;
+  float maxCsAdvantageOnLaneOpponent = 22;
+  float maxLevelLeadLaneOpponent = 23;
+}
+
+message ScyllaPerks {
+  ScyllaPerkStats statPerks = 1;
+  repeated ScyllaPerkStyle styles = 2;
+}
+
+message ScyllaPerkStats {
+  int32 defense = 1;
+  int32 flex = 2;
+  int32 offense = 3;
+}
+
+message ScyllaPerkStyle {
+  string description = 1;
+  repeated ScyllaPerkStyleSelection selections = 2;
+  int32 style = 3;
+}
+
+message ScyllaPerkStyleSelection {
+  int32 perk = 1;
+  int32 var1 = 2;
+  int32 var2 = 3;
+  int32 var3 = 4;
+}

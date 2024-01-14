@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package riot.account.v1;
+
+option go_package = "meep.gg/protos/riot/account/v1";
+
+service RiotAccountService {
+  rpc Puuid(RiotAccountReq) returns (RiotAccount) {}
+  rpc RiotId(RiotAccountReq) returns (RiotAccount) {}
+}
+
+message RiotAccount {
+  string puuid = 1;
+  string gameName = 2;
+  string tagLine = 3;
+}
+
+message RiotAccountReq {
+  string region = 1;
+  string puuid = 2;
+  string gameName = 3;
+  string tagLine = 4;
+}

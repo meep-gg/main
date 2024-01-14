@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package scylla.lol.participant.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/participant/v1";
+import "google/protobuf/empty.proto";
+
+service ScyllaParticipantService {
+  // Participant
+  rpc GetParticipant(ScyllaParticipantReq) returns (ScyllaParticipant) {}
+  rpc GetParticipants(ScyllaGetParticipantsReq) returns (ScyllaParticipants) {}
+  rpc GetMatchParticipants(ScyllaMatchParticipantsReq) returns (ScyllaParticipants) {}
+  rpc PaginateParticipant(ScyllaPaginateParticipantsReq) returns (ScyllaParticipants) {}
+  rpc UpsertParticipant(ScyllaUpsertParticipantReq) returns (google.protobuf.Empty) {}
+  rpc DeleteParticipant(ScyllaParticipantReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaMatchParticipantsReq {
+  string region = 1;
+  int64 gameId = 2;
+  repeated string puuids = 3;
+}
+
+message ScyllaPaginateParticipantsReq {
+  string region = 1;
+  string puuid = 2;
+  int64 gameId = 3;
+  int32 count = 4;
+}
+
+message ScyllaUpsertParticipantReq {
+  string region = 1;
+  ScyllaParticipant participant = 2;
+}
+
+message ScyllaParticipantReq {
+  string region = 1;
+  string puuid = 2;
+  int64 gameId = 3;
+}
+
+message ScyllaGetParticipantsReq {
+  string region = 1;
+  string puuid = 2;
+}
+
+message ScyllaParticipants {
+  repeated ScyllaParticipant participants = 1;
+}
+
+message ScyllaParticipant {
+  string puuid = 1;
+  int64 gameId = 2;
+  int32 championId = 3;
+  int32 champLevel = 4;
+  float kda = 5;
+  int32 kills = 6;
+  int32 deaths = 7;
+  int32 assists = 8;
+  int32 goldEarned = 9;
+  float goldPerMinute = 10;
+  int32 totalMinionsKilled = 11;
+  int32 totalDamageDealtToChampions = 12;
+  float damagePerMinute = 13;
+  int32 totalDamageTaken = 14;
+  int32 timeCCingOthers = 15;
+  string individualPosition = 16;
+  bool win = 17;
+  int32 rank = 18;
+  int32 ParticipantId = 19;
+  int32 item0 = 20;
+  int32 item1 = 21;
+  int32 item2 = 22;
+  int32 item3 = 23;
+  int32 item4 = 24;
+  int32 item5 = 25;
+  int32 item6 = 26;
+  int32 summoner1Id = 27;
+  int32 summoner2Id = 28;
+  int32 primaryStyle = 29;
+  int32 subStyle = 30;
+  int32 teamId = 31;
+  int32 placement = 32;
+  int32 playerAugment1 = 33;
+  int32 playerAugment2 = 34;
+  int32 playerAugment3 = 35;
+  int32 playerAugment4 = 36;
+  int32 playerSubteamId = 37;
+  float teamDamagePercentage = 38;
+  float visionScorePerMinute = 39;
+  float killParticipation = 40;
+  int32 neutralMinionsKilled = 41;
+}

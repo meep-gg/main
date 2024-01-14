@@ -1,0 +1,367 @@
+syntax = "proto3";
+package riot.lol.match.v1;
+
+option go_package = "meep.gg/protos/riot/lol/match/v1";
+
+
+service RiotMatchService {
+  rpc Puuid (RiotMatchPuuidReq) returns (RiotMatchIds) {}
+  rpc Id (RiotMatchIdReq) returns (RiotMatch) {}
+}
+
+message RiotMatchPuuidReq {
+  string region = 1;
+  string puuid = 2;
+  int64 startTime = 3;
+  int64 endTime = 4;
+  int32 queue = 5;
+  string type = 6;
+  int32 start = 7;
+  int32 count = 8;
+}
+
+message RiotMatchIdReq {
+  string region = 1;
+  string matchId = 2;
+}
+
+message RiotMatchIds {
+  repeated string matches = 1;
+}
+
+message RiotMatch {
+  Metadata metadata = 1;
+  MatchInfo info = 2;
+}
+
+message Metadata {
+  string dataVersion = 1;
+  string matchId = 2;
+  repeated string participants = 3;
+}
+
+message MatchInfo {
+  int64 gameCreation = 1;
+  int32 gameDuration = 2;
+  int64 gameEndTimestamp = 3;
+  int64 gameId = 4;
+  string gameMode = 5;
+  string gameName = 6;
+  int64 gameStartTimestamp = 7;
+  string gameType = 8;
+  string gameVersion = 9;
+  int32 mapId = 10;
+  repeated Participant participants = 11;
+  string platformId = 12;
+  int32 queueId = 13;
+  repeated Team teams = 14;
+  string tournamentCode = 15;
+}
+
+message Participant {
+  int32 allInPings = 1;
+  int32 assistMePings = 2;
+  int32 assists = 3;
+  int32 baitPings = 4;
+  int32 baronKills = 5;
+  int32 basicPings = 6;
+  int32 bountyLevel = 7;
+  Challenges challenges = 8;
+  int32 champExperience = 9;
+  int32 champLevel = 10;
+  int32 championId = 11;
+  string championName = 12;
+  int32 championTransform = 13;
+  int32 commandPings = 14;
+  int32 consumablesPurchased = 15;
+  int32 damageDealtToBuildings = 16;
+  int32 damageDealtToObjectives = 17;
+  int32 damageDealtToTurrets = 18;
+  int32 damageSelfMitigated = 19;
+  int32 dangerPings = 20;
+  int32 deaths = 21;
+  int32 detectorWardsPlaced = 22;
+  int32 doubleKills = 23;
+  int32 dragonKills = 24;
+  bool eligibleForProgression = 25;
+  int32 enemyMissingPings = 26;
+  int32 enemyVisionPings = 27;
+  bool firstBloodAssist = 28;
+  bool firstBloodKill = 29;
+  bool firstTowerAssist = 30;
+  bool firstTowerKill = 31;
+  bool gameEndedInEarlySurrender = 32;
+  bool gameEndedInSurrender = 33;
+  int32 getBackPings = 34;
+  int32 goldEarned = 35;
+  int32 goldSpent = 36;
+  int32 holdPings  = 37;
+  string individualPosition = 38;
+  int32 inhibitorKills = 39;
+  int32 inhibitorTakedowns = 40;
+  int32 inhibitorsLost = 41;
+  int32 item0 = 42;
+  int32 item1 = 43;
+  int32 item2 = 44;
+  int32 item3 = 45;
+  int32 item4 = 46;
+  int32 item5 = 47;
+  int32 item6 = 48;
+  int32 itemsPurchased = 49;
+  int32 killingSprees = 50;
+  int32 kills = 51;
+  string lane = 52;
+  int32 largestCriticalStrike = 53;
+  int32 largestKillingSpree = 54;
+  int32 largestMultiKill = 55;
+  int32 longestTimeSpentLiving = 56;
+  int32 magicDamageDealt = 57;
+  int32 magicDamageDealtToChampions = 58;
+  int32 magicDamageTaken = 59;
+  int32 neutralMinionsKilled = 60;
+  int32 needVisionPings = 61;
+  int32 nexusKills = 62;
+  int32 nexusLost = 63;
+  int32 nexusTakedowns = 64;
+  int32 objectivesStolen = 65;
+  int32 objectivesStolenAssists = 66;
+  int32 onMyWayPings = 67;
+  int32 participantId = 68;
+  int32 pentaKills = 69;
+  int32 playerScore11 = 70;
+  Perks perks = 71;
+  int32 physicalDamageDealt = 72;
+  int32 physicalDamageDealtToChampions = 73;
+  int32 physicalDamageTaken = 74;
+  int32 placement = 75;
+  int32 playerAugment1 = 76;
+  int32 playerAugment2 = 77;
+  int32 playerAugment3 = 78;
+  int32 playerAugment4 = 79;
+  int32 playerSubteamId = 80;
+  int32 profileIcon = 81;
+  int32 pushPings = 82;
+  string puuid = 83;
+  int32 quadraKills = 84;
+  string riotIdGameName = 85;
+  string riotIdTagline = 86;
+  string role = 87;
+  int32 sightWardsBoughtInGame = 88;
+  int32 spell1Casts = 89;
+  int32 spell2Casts = 90;
+  int32 spell3Casts = 91;
+  int32 spell4Casts = 92;
+  int32 subteamPlacement = 93;
+  int32 summoner1Casts = 94;
+  int32 summoner1Id = 95;
+  int32 summoner2Casts = 96;
+  int32 summoner2Id = 97;
+  string summonerId = 98;
+  int32 summonerLevel = 99;
+  string summonerName = 100;
+  bool teamEarlySurrendered = 101;
+  int32 teamId = 102;
+  string teamPosition = 103;
+  int32 timeCCingOthers = 104;
+  int32 timePlayed = 105;
+  int32 totalAllyJungleMinionsKilled = 106;
+  int32 totalDamageDealt = 107;
+  int32 totalDamageDealtToChampions = 108;
+  int32 totalDamageShieldedOnTeammates = 109;
+  int32 totalDamageTaken = 110;
+  int32 totalEnemyJungleMinionsKilled = 111;
+  int32 totalHeal = 112;
+  int32 totalHealsOnTeammates = 114;
+  int32 totalMinionsKilled = 115;
+  int32 totalTimeCCDealt = 116;
+  int32 totalTimeSpentDead = 117;
+  int32 totalUnitsHealed = 118;
+  int32 tripleKills = 119;
+  int32 trueDamageDealt = 120;
+  int32 trueDamageDealtToChampions = 121;
+  int32 trueDamageTaken = 122;
+  int32 turretKills = 123;
+  int32 turretTakedowns = 124;
+  int32 turretsLost = 125;
+  int32 unrealKills = 126;
+  int32 visionClearedPings = 127;
+  int32 visionScore = 128;
+  int32 visionWardsBoughtInGame = 129;
+  int32 wardsKilled = 130;
+  int32 wardsPlaced = 131;
+  bool win = 132;
+
+  // arena stats
+  map<string, int32> missions = 133;
+  int32 playerScore0 = 134;
+  int32 playerScore1 = 135;
+  int32 playerScore2 = 136;
+  int32 playerScore3 = 137;
+  int32 playerScore4 = 138;
+  int32 playerScore5 = 139;
+  int32 playerScore6 = 140;
+  int32 playerScore7 = 141;
+  int32 playerScore8 = 142;
+  int32 playerScore9 = 143;
+  int32 playerScore10 = 144;
+}
+
+message Challenges {
+  int32 _12AssistStreakCount = 1;
+  int32 abilityUses = 2;
+  int32 acesBefore15Minutes = 3;
+  int32 alliedJungleMonsterKills = 4;
+  int32 baronTakedowns = 5;
+  int32 blastConeOppositeOpponentCount = 6;
+  int32 bountyGold = 7;
+  int32 buffsStolen = 8;
+  int32 completeSupportQuestInTime = 9;
+  int32 controlWardsPlaced = 10;
+  float damagePerMinute = 11;
+  float damageTakenOnTeamPercentage = 12;
+  int32 dancedWithRiftHerald = 13;
+  int32 deathsByEnemyChamps = 14;
+  int32 dodgeSkillShotsSmallWindow = 15;
+  int32 doubleAces = 16;
+  int32 dragonTakedowns = 17;
+  float effectiveHealAndShielding = 18;
+  int32 elderDragonKillsWithOpposingSoul = 19;
+  int32 elderDragonMultikills = 20;
+  int32 enemyChampionImmobilizations = 21;
+  int32 enemyJungleMonsterKills = 22;
+  int32 epicMonsterKillsNearEnemyJungler  = 23;
+  int32 epicMonsterKillsWithin30SecondsOfSpawn = 24;
+  int32 epicMonsterSteals = 25;
+  int32 epicMonsterStolenWithoutSmite = 26;
+  int32 firstTurretKilled = 27;
+  int32 flawlessAces = 28;
+  int32 fullTeamTakedown  = 29;
+  float gameLength = 30;
+  int32 getTakedownsInAllLanesEarlyJungleAsLaner = 31;
+  float goldPerMinute = 32;
+  int32 hadOpenNexus = 33;
+  int32 immobilizeAndKillWithAlly = 34;
+  int32 initialBuffCount = 35;
+  int32 initialCrabCount = 36;
+  float jungleCsBefore10Minutes = 37;
+  int32 junglerTakedownsNearDamagedEpicMonster = 38;
+  int32 kTurretsDestroyedBeforePlatesFall = 39;
+  float kda = 40;
+  int32 killAfterHiddenWithAlly = 41;
+  float killParticipation = 42;
+  int32 killedChampTookFullTeamDamageSurvived = 43;
+  int32 killingSprees = 44;
+  int32 killsNearEnemyTurret = 45;
+  int32 killsOnOtherLanesEarlyJungleAsLaner = 46;
+  int32 killsOnRecentlyHealedByAramPack = 47;
+  int32 killsUnderOwnTurret = 48;
+  int32 killsWithHelpFromEpicMonster = 49;
+  int32 knockEnemyIntoTeamAndKill = 50;
+  int32 landSkillShotsEarlyGame = 51;
+  int32 laneMinionsFirst10Minutes = 52;
+  int32 legendaryCount = 53;
+  int32 lostAnInhibitor = 54;
+  int32 maxKillDeficit = 55;
+  int32 mejaisFullStackInTime = 56;
+  float moreEnemyJungleThanOpponent = 57;
+  int32 multiKillOneSpell = 58;
+  int32 multiTurretRiftHeraldCount = 59;
+  int32 multikills = 60;
+  int32 multikillsAfterAggressiveFlash = 61;
+  int32 mythicItemUsed = 62;
+  int32 outerTurretExecutesBefore10Minutes = 63;
+  int32 outnumberedKills = 64;
+  int32 outnumberedNexusKill = 65;
+  int32 perfectDragonSoulsTaken = 66;
+  int32 perfectGame = 67;
+  int32 pickKillWithAlly = 68;
+  int32 poroExplosions = 69;
+  int32 quickCleanse = 70;
+  int32 quickFirstTurret = 71;
+  int32 quickSoloKills = 72;
+  int32 riftHeraldTakedowns = 73;
+  int32 saveAllyFromDeath = 74;
+  int32 scuttleCrabKills = 75;
+  int32 skillshotsDodged = 76;
+  int32 skillshotsHit = 77;
+  int32 snowballsHit = 78;
+  int32 soloBaronKills = 79;
+  int32 soloKills = 80;
+  int32 stealthWardsPlaced = 81;
+  int32 survivedSingleDigitHpCount = 82;
+  int32 survivedThreeImmobilizesInFight = 83;
+  int32 takedownOnFirstTurret = 84;
+  int32 takedowns = 85;
+  int32 takedownsAfterGainingLevelAdvantage = 86;
+  int32 takedownsBeforeJungleMinionSpawn = 87;
+  int32 takedownsFirstXMinutes = 88;
+  int32 takedownsInAlcove = 89;
+  int32 takedownsInEnemyFountain = 90;
+  int32 teamBaronKills = 91;
+  float teamDamagePercentage = 92;
+  int32 teamElderDragonKills = 93;
+  int32 teamRiftHeraldKills = 94;
+  int32 tookLargeDamageSurvived = 95;
+  int32 turretPlatesTaken = 96;
+  int32 turretTakedowns = 97;
+  int32 turretsTakenWithRiftHerald = 98;
+  int32 twentyMinionsIn3SecondsCount = 99;
+  int32 twoWardsOneSweeperCount = 100;
+  int32 unseenRecalls = 101;
+  float visionScorePerMinute = 102;
+  int32 wardTakedowns = 103;
+  int32 wardTakedownsBefore20M = 104;
+  int32 wardsGuarded = 105;
+  float maxCsAdvantageOnLaneOpponent = 106;
+  float maxLevelLeadLaneOpponent = 107;
+}
+
+message Perks {
+  PerkStats statPerks = 1;
+  repeated PerkStyle styles = 2;
+}
+
+message PerkStats {
+  int32 defense = 1;
+  int32 flex = 2;
+  int32 offense = 3;
+}
+
+message PerkStyle {
+  string description = 1;
+  repeated PerkStyleSelection selections = 2;
+  int32 style = 3;
+}
+
+message PerkStyleSelection {
+  int32 perk = 1;
+  int32 var1 = 2;
+  int32 var2 = 3;
+  int32 var3 = 4;
+}
+
+message Team {
+  repeated Ban bans = 1;
+  Objectives objectives = 2;
+  int32 teamId = 3;
+  bool win = 4;
+}
+
+message Ban {
+  int32 championId = 1;
+  int32 pickTurn = 2;
+}
+
+message Objectives {
+  Objective baron = 1;
+  Objective champion = 2;
+  Objective dragon = 3;
+  Objective inhibitor = 4;
+  Objective riftHerald = 5;
+  Objective tower = 6;
+}
+
+message Objective {
+  bool first = 1;
+  int32 kills = 2;
+}

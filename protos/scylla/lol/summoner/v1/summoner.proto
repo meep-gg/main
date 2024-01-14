@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package scylla.lol.summoner.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/summoner/v1";
+import "google/protobuf/empty.proto";
+
+service ScyllaSummonerService {
+  rpc GetSummoner(ScyllaSummonerReq) returns (ScyllaSummoner) {}
+  rpc UpsertSummoner(ScyllaUpsertSummonerReq) returns (google.protobuf.Empty) {}
+  rpc DeleteSummoner(ScyllaSummonerReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaUpsertSummonerReq {
+  string region = 1;
+  ScyllaSummoner summoner = 2;
+}
+
+message ScyllaSummoner {
+  string puuid = 1;
+  string id = 2;
+  string name = 3;
+  int32 profileIconId = 4;
+  int32 summonerLevel = 5;
+}
+
+message ScyllaSummonerReq {
+  string region = 1;
+  string puuid = 2;
+}

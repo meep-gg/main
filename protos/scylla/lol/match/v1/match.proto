@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package scylla.lol.match.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/match/v1";
+import "google/protobuf/empty.proto";
+
+service ScyllaMatchService {
+  // Match
+  rpc CheckMatch(ScyllaMatchReq) returns (google.protobuf.Empty) {}
+  rpc GetMatch(ScyllaMatchReq) returns (ScyllaMatch) {}
+  rpc GetMatches(ScyllaGetMatchesReq) returns (ScyllaMatches) {}
+  rpc UpsertMatch(ScyllaUpsertMatchReq) returns (google.protobuf.Empty) {}
+  rpc DeleteMatch(ScyllaMatchReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaUpsertMatchReq {
+  string region = 1;
+  ScyllaMatch match = 2;
+}
+
+message ScyllaGetMatchesReq {
+  string region = 1;
+  repeated int64 gameIds = 2;
+}
+
+message ScyllaMatches {
+  repeated ScyllaMatch matches = 1;
+}
+
+message ScyllaMatchReq {
+  string region = 1;
+  int64 gameId = 2;
+}
+
+message ScyllaMatch {
+  int64 gameId = 1;
+  int32 gameDuration = 2;
+  int64 gameEndTimestamp = 3;
+  int32 season = 4;
+  int32 patch = 5;
+  int32 rank = 6;
+  int32 queueId = 7;
+  repeated int32 bans = 8;
+  repeated ScyllaMatchParticipant participants = 9;
+}
+
+message ScyllaMatchParticipant {
+  string puuid = 1;
+  string gameName = 2;
+  string tagLine = 3;
+  int32 championId = 4;
+}

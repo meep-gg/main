@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package scylla.lol.champion.v1;
+
+option go_package = "meep.gg/protos/scylla/lol/champion/v1";
+import "google/protobuf/empty.proto";
+
+service ChampionService {
+  rpc GetChampion(GetChampionRequest) returns (Champion) {}
+  rpc UpsertChampion(UpsertChampionRequest) returns (google.protobuf.Empty) {}
+  rpc DeleteChampion(DeleteChampionRequest) returns (google.protobuf.Empty) {}
+}
+
+message GetChampionRequest {
+  string region = 1;
+  int32 id = 2;
+  int32 season = 3;
+  int32 patch = 4;
+  int32 queue = 5;
+}
+
+message UpsertChampionRequest {
+  string region = 1;
+  Champion champion = 2;
+}
+
+message DeleteChampionRequest {
+  string region = 1;
+  int32 id = 2;
+  int32 season = 3;
+  int32 patch = 4;
+  int32 queue = 5;
+}
+
+message Champion {
+  int32 id = 1;
+}

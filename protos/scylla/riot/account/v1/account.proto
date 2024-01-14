@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package scylla.riot.account.v1;
+
+option go_package = "meep.gg/protos/scylla/riot/account/v1";
+import "google/protobuf/empty.proto";
+
+
+service ScyllaAccountService {
+  rpc GetAccount(ScyllaAccountReq) returns (ScyllaAccount) {}
+  rpc UpsertAccount(ScyllaUpsertAccountReq) returns (google.protobuf.Empty) {}
+  rpc DeleteAccount(ScyllaAccountReq) returns (google.protobuf.Empty) {}
+}
+
+message ScyllaAccount {
+  string puuid = 1;
+  string gameName = 2;
+  string tagLine = 3;
+}
+
+message ScyllaAccountReq {
+  string region = 1;
+  string puuid = 2;
+}
+
+message ScyllaUpsertAccountReq {
+  string region = 1;
+  ScyllaAccount account = 2;
+}

@@ -1,0 +1,86 @@
+syntax = "proto3";
+package riot.lol.league.v1;
+
+option go_package = "meep.gg/protos/riot/lol/league/v1";
+
+service RiotLeagueService {
+  rpc Challenger (RiotLeagueApexReq) returns (RiotLeagueList) {}
+  rpc Grandmaster (RiotLeagueApexReq) returns (RiotLeagueList) {}
+  rpc Master (RiotLeagueApexReq) returns (RiotLeagueList) {}
+  rpc SummonerId (RiotLeagueSummonerIdReq) returns (RiotLeagueEntries) {}
+  rpc LeagueId (RiotLeagueIdReq) returns (RiotLeagueList) {}
+  rpc Entry (RiotLeagueEntryReq) returns (RiotLeagueEntries) {}
+}
+
+message RiotLeagueApexReq {
+  string region = 1;
+  string queue = 2;
+}
+
+message RiotLeagueSummonerIdReq {
+  string region = 1;
+  string summonerId = 2;
+}
+
+message RiotLeagueIdReq {
+  string region = 1;
+  string leagueId = 2;
+}
+
+message RiotLeagueEntryReq {
+  string region = 1;
+  string division = 2;
+  string tier = 3;
+  string queue = 4;
+  int32 page = 5;
+}
+
+message RiotLeagueEntries {
+  repeated RiotLeagueEntry leagues = 1;
+}
+
+message RiotLeagueEntry {
+  string leagueId = 1;
+  string summonerId = 2;
+  string summonerName = 3;
+  string queueType = 4;
+  string tier = 5;
+  string rank = 6;
+  int32 leaguePoints = 7;
+  int32 wins = 8;
+  int32 losses = 9;
+  bool hotStreak = 10;
+  bool veteran = 11;
+  bool freshBlood = 12;
+  bool inactive = 13;
+  MiniSeries miniSeries = 14;
+}
+
+message RiotLeagueList {
+  string leagueId = 1;
+  repeated LeagueItem entries = 2;
+  string tier = 3;
+  string name = 4;
+  string queue = 5;
+}
+
+message LeagueItem {
+  bool freshBlood = 1;
+  int32 wins = 2;
+  string summonerName = 3;
+  MiniSeries miniSeries = 4;
+  bool inactive = 5;
+  bool veteran = 6;
+  bool hotStreak = 7;
+  string rank = 8;
+  int32 leaguePoints = 9;
+  int32 losses = 10;
+  string summonerId = 11;
+}
+
+message MiniSeries {
+  int32 wins = 1;
+  int32 losses = 2;
+  int32 target = 3;
+  string progress = 4;
+}
